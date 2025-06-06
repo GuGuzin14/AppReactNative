@@ -28,7 +28,7 @@ const ListaUsuariosScreen = () => {
                 renderItem={({item}) => (
                     <View>
                         <Text style={styles.text}>{item.nome}</Text>
-                        <Button onPress={()=> 
+                        <Button mode="contained" onPress={()=> 
                             navigation.navigate('DetalhesUsuario', {id: item.id})}> Ver Mais </Button>
                         <Divider/>
                     </View>
