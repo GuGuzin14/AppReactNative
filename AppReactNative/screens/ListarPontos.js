@@ -8,7 +8,7 @@ const ListaRegistrosPontoScreen = ({ navigation }) => {
     useEffect(() => {
         const fetchRegistros = async () => {
             try {
-                const response = await api.get('/registros_ponto');
+                const response = await api.get('/pontos');
                 setRegistros(response.data);
             } catch (error) {
                 console.log(error);
@@ -25,11 +25,12 @@ const ListaRegistrosPontoScreen = ({ navigation }) => {
                 renderItem={({ item }) => (
                     <View style={styles.item}>
                         <Text>Funcionário ID: {item.funcionario_id}</Text>
-                        <Text>Data/Hora: {item.data_hora}</Text>
+                        <Text>Data: {item.data_registro}</Text>
+                        <Text>Hora: {item.horario_registro}</Text>
                         <Text>Tipo: {item.tipo}</Text>
                         <Button
                             title="Detalhes"
-                            onPress={() => navigation.navigate('DetalhesRegistroPonto', { id: item.id })}
+                            onPress={() => navigation.navigate('Detalhes Registro de Ponto', { id: item.id })}
                         />
                     </View>
                 )}

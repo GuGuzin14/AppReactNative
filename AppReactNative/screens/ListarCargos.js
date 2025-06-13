@@ -27,7 +27,7 @@ const ListaCargosScreen = ({ navigation }) => {
                         <Text>{item.nome}</Text>
                         <Button
                             title="Detalhes"
-                            onPress={() => navigation.navigate('DetalhesCargo', { id: item.id })}
+                            onPress={() => navigation.navigate('Detalhes Cargo', { id: item.id })}
                         />
                     </View>
                 )}

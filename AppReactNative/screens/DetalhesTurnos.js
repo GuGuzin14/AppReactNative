@@ -4,13 +4,17 @@ import api from '../api';
 
 const DetalhesTurnoScreen = ({ route, navigation }) => {
     const { id } = route.params;
-    const [nome, setNome] = useState('');
+    const [periodo, setPeriodo] = useState('');
+    const [horarioInicio, setHorarioInicio] = useState('');
+    const [horarioFim, setHorarioFim] = useState('');
 
     useEffect(() => {
         const fetchTurno = async () => {
             try {
                 const response = await api.get(`/turnos/${id}`);
-                setNome(response.data.nome);
+                setPeriodo(response.data.periodo || '');
+                setHorarioInicio(response.data.horario_inicio || '');
+                setHorarioFim(response.data.horario_fim || '');
             } catch (error) {
                 console.log(error);
             }
@@ -20,7 +24,11 @@ const DetalhesTurnoScreen = ({ route, navigation }) => {
 
     const atualizarTurno = async () => {
         try {
-            await api.put(`/turnos/${id}`, { nome });
+            await api.put(`/turnos/${id}`, {
+                periodo,
+                horario_inicio: horarioInicio,
+                horario_fim: horarioFim
+            });
             alert('Turno atualizado com sucesso!');
             navigation.goBack();
         } catch (error) {
@@ -41,9 +49,21 @@ const DetalhesTurnoScreen = ({ route, navigation }) => {
     return (
         <View style={styles.container}>
             <TextInput
-                placeholder="Nome do Turno"
-                value={nome}
-                onChangeText={setNome}
+                placeholder="Período do Turno"
+                value={periodo}
+                onChangeText={setPeriodo}
+                style={styles.input}
+            />
+            <TextInput
+                placeholder="Horário de Início"
+                value={horarioInicio}
+                onChangeText={setHorarioInicio}
+                style={styles.input}
+            />
+            <TextInput
+                placeholder="Horário de Fim"
+                value={horarioFim}
+                onChangeText={setHorarioFim}
                 style={styles.input}
             />
             <Button title="Atualizar" onPress={atualizarTurno} />

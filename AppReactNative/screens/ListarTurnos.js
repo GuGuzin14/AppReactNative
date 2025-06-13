@@ -24,10 +24,10 @@ const ListaTurnosScreen = ({ navigation }) => {
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <View style={styles.item}>
-                        <Text>{item.nome}</Text>
+                        <Text>{item.periodo}</Text>
                         <Button
                             title="Detalhes"
-                            onPress={() => navigation.navigate('DetalhesTurno', { id: item.id })}
+                            onPress={() => navigation.navigate('Detalhes Turno', { id: item.id })}
                         />
                     </View>
                 )}

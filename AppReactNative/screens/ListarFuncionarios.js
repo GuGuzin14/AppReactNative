@@ -27,7 +27,7 @@ const ListaFuncionariosScreen = ({ navigation }) => {
                         <Text>{item.nome}</Text>
                         <Button
                             title="Detalhes"
-                            onPress={() => navigation.navigate('DetalhesFuncionario', { id: item.id })}
+                            onPress={() => navigation.navigate('Detalhes Funcionário', { id: item.id })}
                         />
                     </View>
                 )}

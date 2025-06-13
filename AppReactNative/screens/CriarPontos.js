@@ -16,8 +16,8 @@ const CriarRegistroPontoScreen = ({ navigation }) => {
         try {
             const payload = {
                 funcionario_id: Number(funcionario_id),
-                data: data_registro,
-                horario: horario_registro,
+                data_registro,
+                horario_registro,
                 tipo
             };
             await api.post('/pontos', payload);

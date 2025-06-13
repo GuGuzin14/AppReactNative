@@ -5,15 +5,17 @@ import api from '../api';
 const DetalhesRegistroPontoScreen = ({ route, navigation }) => {
     const { id } = route.params;
     const [funcionario_id, setFuncionarioId] = useState('');
-    const [data_hora, setDataHora] = useState('');
+    const [data_registro, setDataRegistro] = useState('');
+    const [horario_registro, setHorarioRegistro] = useState('');
     const [tipo, setTipo] = useState('');
 
     useEffect(() => {
         const fetchRegistro = async () => {
             try {
-                const response = await api.get(`/registros_ponto/${id}`);
+                const response = await api.get(`/pontos/${id}`);
                 setFuncionarioId(response.data.funcionario_id.toString());
-                setDataHora(response.data.data_hora);
+                setDataRegistro(response.data.data_registro);
+                setHorarioRegistro(response.data.horario_registro);
                 setTipo(response.data.tipo);
             } catch (error) {
                 console.log(error);
@@ -24,7 +26,7 @@ const DetalhesRegistroPontoScreen = ({ route, navigation }) => {
 
     const atualizarRegistro = async () => {
         try {
-            await api.put(`/registros_ponto/${id}`, { funcionario_id, data_hora, tipo });
+            await api.put(`/pontos/${id}`, { funcionario_id, data_registro, horario_registro, tipo });
             alert('Registro de ponto atualizado com sucesso!');
             navigation.goBack();
         } catch (error) {
@@ -34,7 +36,7 @@ const DetalhesRegistroPontoScreen = ({ route, navigation }) => {
 
     const excluirRegistro = async () => {
         try {
-            await api.delete(`/registros_ponto/${id}`);
+            await api.delete(`/pontos/${id}`);
             alert('Registro de ponto excluído com sucesso!');
             navigation.goBack();
         } catch (error) {
@@ -51,9 +53,15 @@ const DetalhesRegistroPontoScreen = ({ route, navigation }) => {
                 style={styles.input}
             />
             <TextInput
-                placeholder="Data/Hora (YYYY-MM-DD HH:MM:SS)"
-                value={data_hora}
-                onChangeText={setDataHora}
+                placeholder="Data (YYYY-MM-DD)"
+                value={data_registro}
+                onChangeText={setDataRegistro}
+                style={styles.input}
+            />
+            <TextInput
+                placeholder="Hora (HH:MM:SS)"
+                value={horario_registro}
+                onChangeText={setHorarioRegistro}
                 style={styles.input}
             />
             <TextInput
