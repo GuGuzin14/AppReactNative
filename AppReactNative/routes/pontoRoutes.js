@@ -25,10 +25,10 @@ router.get('/registros_ponto/:id', async (req, res) => {
 // Criar um novo registro de ponto
 router.post('/registros_ponto', async (req, res) => {
     try {
-        const { funcionario_id, data_hora, tipo } = req.body;
+        const { funcionario_id, data, horario, tipo } = req.body;
         const [result] = await conexao.query(
-            'INSERT INTO registros_ponto (funcionario_id, data_hora, tipo) VALUES (?, ?, ?)',
-            [funcionario_id, data_hora, tipo]
+            'INSERT INTO registros_ponto (funcionario_id, data, horario, tipo) VALUES (?, ?, ?, ?)',
+            [funcionario_id, data, horario, tipo]
         );
         res.json({ id: result.insertId });
     } catch (error) {
